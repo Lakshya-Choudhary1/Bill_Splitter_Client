@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const BottomNavBar = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default BottomNavBar
+export default BottomNavBar;
