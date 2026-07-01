@@ -1,7 +1,7 @@
 import React from "react";
 import { Home, Wallet, Users, User } from "lucide-react";
 
-const BottomNavbar = () => {
+const BottomNavbar = ({ setSelectPage, selectPage }) => {
   return (
     <nav
       className="
@@ -15,43 +15,119 @@ const BottomNavbar = () => {
       bg-white
       rounded-2xl
       border
-      border-gray-400
-      shadow-lg
+      border-gray-200
+      shadow-xl
       grid
       grid-cols-4
       items-center
       z-50
     "
     >
-      <NavItem icon={<Home size={20} />} text="Home" active />
+      <NavItem
+        icon={<Home size={20} />}
+        text="Home"
+        active={selectPage === "home"}
+        onClick={() => setSelectPage("home")}
+      />
 
-      <NavItem icon={<Wallet size={20} />} text="Expense" />
+      <NavItem
+        icon={<Wallet size={20} />}
+        text="Expense"
+        active={selectPage === "expense"}
+        onClick={() => setSelectPage("expense")}
+      />
 
-      <NavItem icon={<Users size={20} />} text="Groups" />
+      <NavItem
+        icon={<Users size={20} />}
+        text="Groups"
+        active={selectPage === "groups"}
+        onClick={() => setSelectPage("groups")}
+      />
 
-      <NavItem icon={<User size={20} />} text="Profile" />
+      <NavItem
+        icon={<User size={20} />}
+        text="Profile"
+        active={selectPage === "profile"}
+        onClick={() => setSelectPage("profile")}
+      />
     </nav>
   );
 };
 
-const NavItem = ({ icon, text, active }) => (
-  <div
+
+const NavItem = ({ icon, text, active, onClick }) => (
+  <button
+    onClick={onClick}
     className={`
-    flex
-    flex-col
-    items-center
-    justify-center
-    text-[11px]
-    gap-1
-
-    ${active ? "text-blue-600" : "text-gray-400"}
-
-  `}
+      relative
+      h-full
+      flex
+      flex-col
+      items-center
+      justify-center
+      text-[11px]
+      gap-1
+      transition-all
+      duration-300
+      ease-out
+      ${
+        active
+          ? "text-blue-600 scale-110"
+          : "text-gray-400 scale-100 hover:scale-105"
+      }
+    `}
   >
-    {icon}
 
-    <span>{text}</span>
-  </div>
+    {/* icon animation */}
+    <div
+      className={`
+        transition-all
+        duration-300
+        ${
+          active
+            ? "-translate-y-1 rotate-6"
+            : "translate-y-0 rotate-0"
+        }
+      `}
+    >
+      {icon}
+    </div>
+
+
+    <span
+      className={`
+        transition-all
+        duration-300
+        ${
+          active
+            ? "font-semibold"
+            : "font-normal"
+        }
+      `}
+    >
+      {text}
+    </span>
+
+
+    {/* active dot */}
+    <span
+      className={`
+        absolute
+        bottom-1
+        w-1.5
+        h-1.5
+        rounded-full
+        bg-blue-600
+        transition-all
+        duration-300
+        ${
+          active
+            ? "opacity-100 scale-100"
+            : "opacity-0 scale-0"
+        }
+      `}
+    />
+  </button>
 );
 
 export default BottomNavbar;

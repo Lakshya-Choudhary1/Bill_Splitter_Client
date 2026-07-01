@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Bell, User, LogOut } from "lucide-react";
 
-import userStore from "../../store/user.store.js"
+import userStore from "../../store/user.store.js";
 
 const TopNavbar = () => {
   const [open, setOpen] = useState(false);
-  const {user} = userStore();
+  const { user , logout } = userStore();
 
   return (
     <header
@@ -14,9 +14,13 @@ const TopNavbar = () => {
       top-0
       z-30
       h-16
-      bg-white/80
+      bg-linear-to-br
+      from-blue-50
+      via-white
+      to-green-50
       backdrop-blur
       border-b
+      border-gray-200
       px-5
       flex
       items-center
@@ -29,7 +33,7 @@ const TopNavbar = () => {
         className="
         text-xl
         font-bold
-        bg-gradient-to-r
+        bg-linear-to-r
         from-blue-600
         to-green-500
         text-transparent
@@ -116,26 +120,22 @@ const TopNavbar = () => {
                 flex
                 items-center
                 justify-center
-                bg-gradient-to-r
+                bg-linear-to-r
                 from-blue-600
                 to-green-500
                 text-white
                 font-bold
               "
               >
-                {
-  user.avatar_url 
-  ? (
-      <img
-        className="w-full h-full rounded-full object-cover"
-        src={user.avatar_url}
-        alt="profile"
-      />
-    )
-  : (
-      user.name[0]
-    )
-}
+                {user.avatar_url ? (
+                  <img
+                    className="w-full h-full rounded-full object-cover"
+                    src={user.avatar_url}
+                    alt="profile"
+                  />
+                ) : (
+                  user.name[0]
+                )}
               </div>
 
               <div>
@@ -183,6 +183,7 @@ const TopNavbar = () => {
               transition
               font-medium
             "
+                onClick={async ()=> await logout()}
             >
               <LogOut size={18} />
               Logout

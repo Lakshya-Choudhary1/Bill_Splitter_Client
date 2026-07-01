@@ -1,24 +1,8 @@
 import React from "react";
 
 const RecentExpenses = () => (
-  <div
-    className="
-mt-8
-bg-white
-rounded-3xl
-p-5
-border
-border-gray-300
-shadow-sm
-"
-  >
-    <h3
-      className="
-text-lg
-font-bold
-mb-4
-"
-    >
+  <div className="mt-8 bg-white rounded-3xl p-5 border border-gray-300 shadow-sm">
+    <h3 className="text-lg font-bold mb-4">
       Recent Expenses
     </h3>
 
@@ -31,23 +15,9 @@ mb-4
 );
 
 const Expense = ({ title, amount }) => (
-  <div
-    className="
-flex
-justify-between
-py-3
-border-b
-border-gray-300
-"
-  >
+  <div className="flex justify-between py-3 border-b border-gray-300 ">
     <span>{title}</span>
-
-    <span
-      className="
-text-red-500
-font-semibold
-"
-    >
+    <span className="text-red-500 font-semibold">
       -{amount}
     </span>
   </div>

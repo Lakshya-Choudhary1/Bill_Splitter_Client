@@ -12,9 +12,9 @@ const Loading = () => {
     ">
       <div
         className="
-          w-10
-          h-10
-          border-4
+          w-6
+          h-6
+          border-3
           border-white
           border-t-transparent
           rounded-full

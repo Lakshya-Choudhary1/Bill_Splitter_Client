@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 import TopNavbar from "../components/dashboard/TopNavbar";
 import BottomNavbar from "../components/dashboard/BottomNavbar";
-import BalanceCard from "../components/dashboard/BalanceCard";
-import QuickActions from "../components/dashboard/QuickActions";
-import RecentExpenses from "../components/dashboard/RecentExpenses";
+import Home from "../components/Home.jsx";
+import Expense from "../components/Expense.jsx";
+import Profile from "../components/Profile.jsx";
+import Groups from "../components/Groups.jsx";
 
 const Dashboard = () => {
+  const [selectPage, setSelectPage] = useState("home");
+
   return (
     <div
       className="
       min-h-screen
-      bg-gradient-to-br
+      bg-linear-to-br
       from-blue-50
       via-white
       to-green-50
@@ -20,33 +23,12 @@ const Dashboard = () => {
     >
       <TopNavbar />
 
-      <main className="px-5 pt-6">
-        <h2
-          className="
-          text-2xl
-          font-bold
-        "
-        >
-          Dashboard 👋
-        </h2>
+      {selectPage === "home" && <Home />}
+      {selectPage === "expense" && <Expense />}
+      {selectPage === "profile" && <Profile />}
+      {selectPage === "groups" && <Groups />}
 
-        <p
-          className="
-          text-gray-500
-          mt-1
-        "
-        >
-          Track your expenses
-        </p>
-
-        <BalanceCard />
-
-        <QuickActions />
-
-        <RecentExpenses />
-      </main>
-
-      <BottomNavbar />
+      <BottomNavbar selectPage={selectPage}  setSelectPage={setSelectPage} />
     </div>
   );
 };
