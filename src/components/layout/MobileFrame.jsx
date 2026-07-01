@@ -6,9 +6,12 @@ const MobileFrame = ({ children }) => {
       className="
         w-full
         min-h-screen
-        bg-gray-100
         flex
         justify-center
+        bg-linear-to-br
+      from-blue-200
+      via-white
+      to-green-200
       "
     >
       <div

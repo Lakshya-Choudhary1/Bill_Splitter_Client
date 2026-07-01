@@ -37,7 +37,7 @@ const Home = () => {
     <div
       className="
       min-h-screen
-      bg-gradient-to-b
+      bg-linear-to-r
       from-blue-50
       via-white
       to-green-50

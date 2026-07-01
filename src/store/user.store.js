@@ -5,9 +5,9 @@ import toast from "react-hot-toast";
 const userStore = create((set, get) => ({
   user: null,
 
-  setUser: (user) => set({user}),
+  setUser: (user) => set({ user }),
 
-  clearUser: () => set({ user: null}),
+  clearUser: () => set({ user: null }),
 
   checkAuth: async () => {
     try {
@@ -24,7 +24,6 @@ const userStore = create((set, get) => ({
 
   login: async ({ email, password }) => {
     try {
-  
       const res = await axiosInstance.post("/user/login", {
         email,
         password,
@@ -37,7 +36,7 @@ const userStore = create((set, get) => ({
       }
     } catch (error) {
       get().setUser(null);
-      
+
       toast.error(error.response?.data?.message || "Login failed");
     }
   },
@@ -62,6 +61,79 @@ const userStore = create((set, get) => ({
       toast.error(error.response?.data?.message || "Register failed");
     }
   },
+
+  verifyEmail: async (token) => {
+    try {
+      const res = await axiosInstance.post("/user/verifyEmail", { token });
+      if (res.data.success) {
+        set((state) => ({
+          user: {
+            ...state.user,
+            is_verified: true,
+          },
+        }));
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Verify email failed");
+    }
+  },
+
+  resendVerifyEmailToken: async () => {
+    try {
+      const user = get().user;
+      console.log(user);
+      if (!user?.email) {
+        toast.error("User email not found");
+        return;
+      }
+
+      const res = await axiosInstance.post("/user/resendVerifyEmailToken", {
+        email: user.email,
+      });
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Resend verification failed",
+      );
+    }
+  },
+
+  forgotPassword: async(email)=>{
+     try {
+    
+      const res = await axiosInstance.post("/user/forgot-password", {
+        email
+      });
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Forgot password failed",
+      );
+    }
+  },
+  resetPassword: async(token,password)=>{
+     try {
+    
+      const res = await axiosInstance.post("/user/reset-password", {
+        password,token
+      });
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Forgot password failed",
+      );
+    }
+  }
 }));
 
 export default userStore;

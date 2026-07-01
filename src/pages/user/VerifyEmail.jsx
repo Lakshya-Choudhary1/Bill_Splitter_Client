@@ -1,11 +1,184 @@
-import React from 'react'
+import React, { useRef, useState, useEffect } from "react";
+import { Mail } from "lucide-react";
+import toast from "react-hot-toast";
+
+import userStore from "../../store/user.store.js";
 
 const VerifyEmail = () => {
+  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [loading, setLoading] = useState(false);
+  const [resendTimer, setResendTimer] = useState(0);
+
+  const { verifyEmail, resendVerifyEmailToken } = userStore();
+
+  const inputs = useRef([]);
+
+  useEffect(() => {
+    if (resendTimer <= 0) return;
+
+    const timer = setInterval(() => {
+      setResendTimer((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [resendTimer]);
+
+  const handleChange = (value, index) => {
+
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value && index < 3) {
+      inputs.current[index + 1].focus();
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      inputs.current[index - 1].focus();
+    }
+  };
+
+  const handleVerify = async (e) => {
+    e.preventDefault();
+
+    const token = otp.join("");
+
+    if (token.length !== 4) {
+      toast.error("Enter complete OTP");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      await verifyEmail(token);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResend = async () => {
+    if (resendTimer > 0) return;
+
+    await resendVerifyEmailToken();
+
+    setResendTimer(30);
+  };
+
   return (
-    <div>
-      
+    <div
+      className="
+      min-h-screen
+      flex items-center justify-center
+      bg-linear-to-r
+      from-blue-100
+      via-white
+      to-green-100
+      px-4
+    "
+    >
+      <div
+        className="
+        bg-white
+        w-full max-w-md
+        p-8
+        rounded-3xl
+        shadow-xl
+        border border-gray-100
+      "
+      >
+        <div className="flex justify-center mb-5">
+          <div
+            className="
+            p-4 rounded-2xl
+            bg-linear-to-br
+            from-blue-600
+            to-green-500
+          "
+          >
+            <Mail size={32} className="text-white" />
+          </div>
+        </div>
+
+        <h1
+          className="
+          text-3xl font-bold
+          text-center text-gray-900
+        "
+        >
+          Verify Email
+        </h1>
+
+        <p
+          className="
+          text-center text-gray-500
+          mt-2 mb-8
+        "
+        >
+          Enter the 4 digit code sent to your email
+        </p>
+
+        <form onSubmit={handleVerify}>
+          <div className="flex gap-3 justify-center">
+            {otp.map((digit, index) => (
+              <input
+                key={index}
+                ref={(el) => (inputs.current[index] = el)}
+                
+                maxLength={1}
+                onChange={(e) => handleChange(e.target.value, index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                className="
+                  w-14 h-14
+                  text-center text-xl
+                  font-bold
+                  rounded-xl
+                  border border-gray-200
+                  outline-none
+                  focus:ring-2
+                  focus:ring-blue-500
+                "
+              />
+            ))}
+          </div>
+
+          <div className="w-full mt-3 text-end px-2">
+            <button
+              type="button"
+              onClick={handleResend}
+              disabled={resendTimer > 0}
+              className={`
+                ${
+                  resendTimer > 0
+                    ? "text-gray-400 cursor-not-allowed"
+                    : "text-green-500 hover:text-green-600"
+                }
+              `}
+            >
+              {resendTimer > 0 ? `Resend in ${resendTimer}s` : "Resend"}
+            </button>
+          </div>
+
+          <button
+            disabled={loading}
+            className="
+              mt-8 w-full py-3
+              rounded-xl
+              text-white font-semibold
+              bg-linear-to-r
+              from-blue-600
+              to-green-500
+              hover:opacity-90
+            "
+          >
+            {loading ? "Verifying..." : "Verify Email"}
+          </button>
+        </form>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default VerifyEmail;

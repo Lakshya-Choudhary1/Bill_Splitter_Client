@@ -80,17 +80,14 @@ const App = () => {
           }
         />
 
-        <Route
-          path="/verify-email"
-          element={
-            
-              <VerifyEmail />
-          }
-        />
+        <Route path="/verify-email" element={
+          <RedirectRoute>
+            <VerifyEmail />
+          </RedirectRoute>} />
 
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
-        <Route path="/reset-password/:id" element={<ResetPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Routes>
     </MobileFrame>
   );
