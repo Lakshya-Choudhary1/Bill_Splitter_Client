@@ -32,9 +32,9 @@ const BottomNavbar = ({ setSelectPage, selectPage }) => {
 
       <NavItem
         icon={<Wallet size={20} />}
-        text="Expense"
-        active={selectPage === "expense"}
-        onClick={() => setSelectPage("expense")}
+        text="History"
+        active={selectPage === "history"}
+        onClick={() => setSelectPage("history")}
       />
 
       <NavItem

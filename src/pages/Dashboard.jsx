@@ -1,14 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import TopNavbar from "../components/dashboard/TopNavbar";
 import BottomNavbar from "../components/dashboard/BottomNavbar";
 import Home from "../components/Home.jsx";
-import Expense from "../components/Expense.jsx";
+import History from "../components/History.jsx";
 import Profile from "../components/Profile.jsx";
 import Groups from "../components/Groups.jsx";
+import expenseStore from "../store/expense.store.js";
+import invitationStore from "../store/invitation.store.js"
+import settlementStore from "../store/settlement.store.js";
+import groupStore from "../store/group.store.js";
 
 const Dashboard = () => {
   const [selectPage, setSelectPage] = useState("home");
+  const {getRecentExpenses,getOweExpenses,getOwedExpenses,getAllExpenses} = expenseStore();
+  const {getAllSettlements} = settlementStore();
+  const {getNotifications} = invitationStore();
+  const {getAllgroups} = groupStore();
+
+  useEffect(() => {
+
+    getRecentExpenses();
+    getOwedExpenses();
+    getOweExpenses();
+    getNotifications();
+    getAllExpenses();
+    getAllSettlements();
+    getAllgroups();
+
+  }, [getRecentExpenses]);
 
   return (
     <div
@@ -24,7 +44,7 @@ const Dashboard = () => {
       <TopNavbar />
 
       {selectPage === "home" && <Home />}
-      {selectPage === "expense" && <Expense />}
+      {selectPage === "history" && <History />}
       {selectPage === "profile" && <Profile />}
       {selectPage === "groups" && <Groups />}
 
