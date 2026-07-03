@@ -52,7 +52,6 @@ const VerifyEmail = () => {
 
     try {
       setLoading(true);
-
       await verifyEmail(token);
     } finally {
       setLoading(false);

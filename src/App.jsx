@@ -13,15 +13,26 @@ import VerifyEmail from "./pages/user/VerifyEmail.jsx";
 import ForgotPassword from "./pages/user/ForgotPassword.jsx";
 import ResetPassword from "./pages/user/ResetPassword.jsx";
 
-const AuthenticatedRoute = ({ children }) => {
+const AuthenticatedRoute = ({ children, requireVerification = true }) => {
   const { user, authLoading } = userStore();
 
+  if (authLoading) {
+    return <Loading />;
+  }
+
+  // User is not logged in
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  if (!user.is_verified) {
+  // Route requires verified user (Dashboard)
+  if (requireVerification && !user.is_verified) {
     return <Navigate to="/verify-email" replace />;
+  }
+
+  // Route requires unverified user (Verify Email)
+  if (!requireVerification && user.is_verified) {
+    return <Navigate to="/dashboard" replace />;
   }
 
   return children;
@@ -29,6 +40,10 @@ const AuthenticatedRoute = ({ children }) => {
 
 const RedirectRoute = ({ children }) => {
   const { user, authLoading } = userStore();
+
+  if (authLoading) {
+    return <Loading />;
+  }
 
   if (user?.is_verified) {
     return <Navigate to="/dashboard" replace />;
@@ -46,7 +61,15 @@ const App = () => {
 
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [checkAuth]);
+
+  if (authLoading) {
+    return (
+      <MobileFrame>
+        <Loading />
+      </MobileFrame>
+    );
+  }
 
   return (
     <MobileFrame>
@@ -58,6 +81,15 @@ const App = () => {
           element={
             <AuthenticatedRoute>
               <Dashboard />
+            </AuthenticatedRoute>
+          }
+        />
+
+        <Route
+          path="/verify-email"
+          element={
+            <AuthenticatedRoute requireVerification={false}>
+              <VerifyEmail />
             </AuthenticatedRoute>
           }
         />
@@ -80,14 +112,25 @@ const App = () => {
           }
         />
 
-        <Route path="/verify-email" element={
-          <RedirectRoute>
-            <VerifyEmail />
-          </RedirectRoute>} />
+        <Route
+          path="/forgot-password"
+          element={
+            <RedirectRoute>
+              <ForgotPassword />
+            </RedirectRoute>
+          }
+        />
 
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route
+          path="/reset-password/:token"
+          element={
+            <RedirectRoute>
+              <ResetPassword />
+            </RedirectRoute>
+          }
+        />
 
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </MobileFrame>
   );
