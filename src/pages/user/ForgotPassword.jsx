@@ -1,6 +1,6 @@
 import React, { use, useState } from "react";
 import { Mail, ArrowLeft } from "lucide-react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const ForgotPassword = () => {
 
   const navigator = useNavigate();
 
-  const {forgotPassword} = userStore();
+  const { forgotPassword } = userStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +26,6 @@ const ForgotPassword = () => {
     forgotPassword(email);
     setLoading(false);
     navigator("/");
-    
   };
 
   return (

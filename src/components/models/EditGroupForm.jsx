@@ -4,9 +4,8 @@ import { ArrowLeft, Save } from "lucide-react";
 import groupStore from "../../store/group.store.js";
 
 const EditGroupForm = ({ isOpen, onClose, group }) => {
-
-     const {updateGroup} = groupStore();
-     //name, description, currency 
+  const { updateGroup } = groupStore();
+  //name, description, currency
   const [formData, setFormData] = useState({
     name: group?.name || "",
     description: group?.description || "",
@@ -20,7 +19,7 @@ const EditGroupForm = ({ isOpen, onClose, group }) => {
     }));
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     await updateGroup(group.id, formData);
     onClose();
@@ -89,9 +88,7 @@ const EditGroupForm = ({ isOpen, onClose, group }) => {
 
             {/* Currency */}
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Currency
-              </label>
+              <label className="block text-sm font-medium mb-2">Currency</label>
 
               <select
                 name="currency"

@@ -54,7 +54,6 @@ const BottomNavbar = ({ setSelectPage, selectPage }) => {
   );
 };
 
-
 const NavItem = ({ icon, text, active, onClick }) => (
   <button
     onClick={onClick}
@@ -77,37 +76,26 @@ const NavItem = ({ icon, text, active, onClick }) => (
       }
     `}
   >
-
     {/* icon animation */}
     <div
       className={`
         transition-all
         duration-300
-        ${
-          active
-            ? "-translate-y-1 rotate-6"
-            : "translate-y-0 rotate-0"
-        }
+        ${active ? "-translate-y-1 rotate-6" : "translate-y-0 rotate-0"}
       `}
     >
       {icon}
     </div>
 
-
     <span
       className={`
         transition-all
         duration-300
-        ${
-          active
-            ? "font-semibold"
-            : "font-normal"
-        }
+        ${active ? "font-semibold" : "font-normal"}
       `}
     >
       {text}
     </span>
-
 
     {/* active dot */}
     <span
@@ -120,11 +108,7 @@ const NavItem = ({ icon, text, active, onClick }) => (
         bg-blue-600
         transition-all
         duration-300
-        ${
-          active
-            ? "opacity-100 scale-100"
-            : "opacity-0 scale-0"
-        }
+        ${active ? "opacity-100 scale-100" : "opacity-0 scale-0"}
       `}
     />
   </button>

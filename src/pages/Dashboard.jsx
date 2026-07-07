@@ -15,7 +15,8 @@ const Dashboard = () => {
   const [selectPage, setSelectPage] = useState("home");
   const { getRecentExpenses, getOweExpenses, getOwedExpenses, getAllExpenses } =
     expenseStore();
-  const { getAllSettlements, getTotalReceived,getAllPendingSettlement } = settlementStore();
+  const { getAllSettlements, getTotalReceived, getAllPendingSettlement } =
+    settlementStore();
   const { getNotifications } = invitationStore();
   const { getAllgroups } = groupStore();
 
@@ -30,7 +31,7 @@ const Dashboard = () => {
         getAllSettlements(),
         getAllgroups(),
         getTotalReceived(),
-        getAllPendingSettlement()
+        getAllPendingSettlement(),
       ]);
     };
 

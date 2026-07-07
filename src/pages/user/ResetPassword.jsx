@@ -29,7 +29,7 @@ const ResetPassword = () => {
     }
 
     setLoading(true);
-    await resetPassword(token,password);
+    await resetPassword(token, password);
     setLoading(false);
   };
 

@@ -13,6 +13,7 @@ import VerifyEmail from "./pages/user/VerifyEmail.jsx";
 import ForgotPassword from "./pages/user/ForgotPassword.jsx";
 import ResetPassword from "./pages/user/ResetPassword.jsx";
 
+// Protect routes that require an authenticated user session.
 const AuthenticatedRoute = ({ children, requireVerification = true }) => {
   const { user, authLoading } = userStore();
 

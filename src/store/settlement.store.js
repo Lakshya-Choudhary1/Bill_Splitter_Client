@@ -55,7 +55,7 @@ const settlementStore = create((set, get) => ({
         toast.success(response.data.message);
         get().getAllPendingSettlement();
         get().getAllSettlements();
-        get().getTotalReceived()
+        get().getTotalReceived();
       }
     } catch (error) {
       console.error("Error Creating settlement", error);

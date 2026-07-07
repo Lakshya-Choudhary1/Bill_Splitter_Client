@@ -1,10 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import {
-  Crown,
-  MoreVertical,
-  User,
-  UserMinus,
-} from "lucide-react";
+import { Crown, MoreVertical, User, UserMinus } from "lucide-react";
 
 const MemberCard = ({
   member,
@@ -67,9 +62,7 @@ const MemberCard = ({
 
       <div className="relative" ref={menuRef}>
         <button
-          onClick={() =>
-            setOpenMenu(openMenu === member.id ? null : member.id)
-          }
+          onClick={() => setOpenMenu(openMenu === member.id ? null : member.id)}
           className="p-2 rounded-lg hover:bg-gray-100"
         >
           <MoreVertical size={20} />

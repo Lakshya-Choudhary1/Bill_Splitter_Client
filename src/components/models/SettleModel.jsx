@@ -7,9 +7,8 @@ import settlementStore from "../../store/settlement.store.js";
 import groupStore from "../../store/group.store.js";
 
 const SettleModel = ({ isOpen, onClose, expense }) => {
-
-  const {createSettlement} = settlementStore();
-  const {selectedGroup} = groupStore();
+  const { createSettlement } = settlementStore();
+  const { selectedGroup } = groupStore();
 
   if (!isOpen || !expense) return null;
 
@@ -17,7 +16,7 @@ const SettleModel = ({ isOpen, onClose, expense }) => {
   const payeeName = expense.paid_by_name;
 
   const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(
-    payeeName
+    payeeName,
   )}&am=${expense.amount_owed}&cu=INR`;
 
   const copyUpi = async () => {
@@ -29,14 +28,14 @@ const SettleModel = ({ isOpen, onClose, expense }) => {
     }
   };
 
-  const onInitiate = (expense) =>{
-     createSettlement(expense.id,selectedGroup.id);
-     onClose();
-  }
+  const onInitiate = (expense) => {
+    createSettlement(expense.id, selectedGroup.id);
+    onClose();
+  };
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4"
+      className="fixed inset-0 z-100 flex items-center justify-center bg-black/40 px-4"
       onClick={onClose}
     >
       <div
@@ -46,9 +45,7 @@ const SettleModel = ({ isOpen, onClose, expense }) => {
         {/* Header */}
         <div className="flex items-center justify-between border-b px-6 py-5">
           <div>
-            <h2 className="text-xl font-bold text-gray-900">
-              Settle Expense
-            </h2>
+            <h2 className="text-xl font-bold text-gray-900">Settle Expense</h2>
             <p className="text-sm text-gray-500">
               Scan the QR or copy the UPI ID
             </p>

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import axiosInstance from "../utils/axios.js";
 import toast from "react-hot-toast";
 
-import uploadToCloudinary  from "../services/cloudinary.js";
+import uploadToCloudinary from "../services/cloudinary.js";
 
 const userStore = create((set, get) => ({
   user: null,
@@ -105,36 +105,31 @@ const userStore = create((set, get) => ({
     }
   },
 
-  forgotPassword: async(email)=>{
-     try {
-    
+  forgotPassword: async (email) => {
+    try {
       const res = await axiosInstance.post("/user/forgot-password", {
-        email
+        email,
       });
 
       if (res.data.success) {
         toast.success(res.data.message);
       }
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Forgot password failed",
-      );
+      toast.error(error.response?.data?.message || "Forgot password failed");
     }
   },
-  resetPassword: async(token,password)=>{
-     try {
-    
+  resetPassword: async (token, password) => {
+    try {
       const res = await axiosInstance.post("/user/reset-password", {
-        password,token
+        password,
+        token,
       });
 
       if (res.data.success) {
         toast.success(res.data.message);
       }
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Forgot password failed",
-      );
+      toast.error(error.response?.data?.message || "Forgot password failed");
     }
   },
   logout: async () => {
@@ -149,14 +144,18 @@ const userStore = create((set, get) => ({
   updateUser: async (formData) => {
     const user = get().user;
     try {
-      const res = await axiosInstance.patch("/user/profile", {name:formData.name, upi_id:formData.upi_id, currency:formData.currency});
+      const res = await axiosInstance.patch("/user/profile", {
+        name: formData.name,
+        upi_id: formData.upi_id,
+        currency: formData.currency,
+      });
       if (res.data.success) {
         get().setUser(res.data.user);
         toast.success(res.data.message);
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Update profile failed");
-      set({user:user});
+      set({ user: user });
     }
   },
   updateAvatar: async (avatar) => {
@@ -164,27 +163,27 @@ const userStore = create((set, get) => ({
     try {
       let avatar_url;
       try {
-      avatar_url = await uploadToCloudinary(avatar);
-      }catch (error) {
-        toast.error("Failed to upload avatar");
-        return;
-      } 
-
-      if(!avatar_url){
+        avatar_url = await uploadToCloudinary(avatar);
+      } catch (error) {
         toast.error("Failed to upload avatar");
         return;
       }
 
-      const res = await axiosInstance.patch("/user/avatar", {avatar_url});
+      if (!avatar_url) {
+        toast.error("Failed to upload avatar");
+        return;
+      }
+
+      const res = await axiosInstance.patch("/user/avatar", { avatar_url });
       if (res.data.success) {
         get().setUser(res.data.user);
         toast.success(res.data.message);
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Update avatar failed");
-      set({user:user});
+      set({ user: user });
     }
-  }
+  },
 }));
 
 export default userStore;

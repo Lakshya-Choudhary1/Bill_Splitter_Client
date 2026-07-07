@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Mail } from "lucide-react";
 import toast from "react-hot-toast";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import userStore from "../../store/user.store.js";
 
@@ -26,7 +26,6 @@ const VerifyEmail = () => {
   }, [resendTimer]);
 
   const handleChange = (value, index) => {
-
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
@@ -55,7 +54,7 @@ const VerifyEmail = () => {
     try {
       setLoading(true);
       await verifyEmail(token);
-      navigate("/dashboard")
+      navigate("/dashboard");
     } finally {
       setLoading(false);
     }
@@ -128,7 +127,7 @@ const VerifyEmail = () => {
               <input
                 key={index}
                 ref={(el) => (inputs.current[index] = el)}
-                
+
                 maxLength={1}
                 onChange={(e) => handleChange(e.target.value, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}

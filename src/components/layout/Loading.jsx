@@ -2,14 +2,16 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="
+    <div
+      className="
       w-full
       h-full
       flex
       items-center
       justify-center
       bg-transparent
-    ">
+    "
+    >
       <div
         className="
           w-6

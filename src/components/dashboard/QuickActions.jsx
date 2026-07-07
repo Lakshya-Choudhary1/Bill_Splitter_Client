@@ -17,9 +17,7 @@ const QuickActions = () => {
 
           <div className="relative flex items-center justify-between">
             <div>
-              <p className="text-sm text-emerald-100">
-                Total Settled Amount
-              </p>
+              <p className="text-sm text-emerald-100">Total Settled Amount</p>
 
               <h2 className="mt-2 flex items-center gap-1 text-3xl font-bold">
                 <IndianRupee size={24} />
@@ -44,9 +42,7 @@ const QuickActions = () => {
         >
           {(pendingSettlement?.length ?? 0) > 0 && (
             <span className="absolute -right-1 -top-1 flex h-6 min-w-[24px] items-center justify-center rounded-full bg-red-500 px-2 text-xs font-bold text-white shadow">
-              {pendingSettlement.length > 99
-                ? "99+"
-                : pendingSettlement.length}
+              {pendingSettlement.length > 99 ? "99+" : pendingSettlement.length}
             </span>
           )}
 

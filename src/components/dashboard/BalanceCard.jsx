@@ -3,7 +3,7 @@ import { ArrowUpRight, ArrowDownLeft } from "lucide-react";
 import expenseStore from "../../store/expense.store.js";
 
 const BalanceCard = () => {
-  const { totalOwed, totalOwe} = expenseStore();
+  const { totalOwed, totalOwe } = expenseStore();
 
   const balance = Number(totalOwed ?? 0) - Number(totalOwe ?? 0);
 

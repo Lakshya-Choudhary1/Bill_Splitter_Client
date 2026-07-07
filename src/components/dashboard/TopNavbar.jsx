@@ -13,7 +13,6 @@ const TopNavbar = () => {
   const { user, logout } = userStore();
 
   // Count only pending invitations
- 
 
   return (
     <header

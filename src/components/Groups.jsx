@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import {
-  ChevronRight,
-  Plus,
-} from "lucide-react";
+import { ChevronRight, Plus } from "lucide-react";
 
 import CreateGroupModal from "../components/models/CreateGroupModal.jsx";
 import GroupChatModal from "../components/models/GroupChatModal.jsx";
@@ -12,7 +9,7 @@ const Groups = () => {
   const [createOpen, setCreateOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
 
-  const { groups , selectedGroup , setSelectedGroup } = groupStore();
+  const { groups, selectedGroup, setSelectedGroup } = groupStore();
 
   const handleGroupClick = (group) => {
     setSelectedGroup(group);
@@ -55,15 +52,10 @@ const Groups = () => {
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition cursor-pointer p-5 flex justify-between items-center"
               >
                 <div>
-                  <h2 className="font-semibold text-md">
-                    {group.name}
-                  </h2>
+                  <h2 className="font-semibold text-md">{group.name}</h2>
                 </div>
 
-                <ChevronRight
-                  size={22}
-                  className="text-gray-400"
-                />
+                <ChevronRight size={22} className="text-gray-400" />
               </div>
             ))
           )}

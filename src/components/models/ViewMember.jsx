@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const ViewMember = ({onOpen,onClose,user}) => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const ViewMember = ({ onOpen, onClose, user }) => {
+  return <div></div>;
+};
 
-export default ViewMember
+export default ViewMember;

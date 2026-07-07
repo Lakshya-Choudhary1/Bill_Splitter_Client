@@ -14,7 +14,7 @@ const GroupDetailsModal = ({ isOpen, onClose }) => {
     currentMember,
     deleteGroup,
     leaveGroup,
-    removeMember
+    removeMember,
   } = groupStore();
 
   const [openMemberMenu, setOpenMemberMenu] = useState(null);
@@ -34,8 +34,8 @@ const GroupDetailsModal = ({ isOpen, onClose }) => {
     console.log(member);
   };
 
-  const onRemoveMember = async(memberId) => {
-    await removeMember(group.id,memberId)
+  const onRemoveMember = async (memberId) => {
+    await removeMember(group.id, memberId);
   };
 
   const onLeaveGroup = async () => {
@@ -96,14 +96,11 @@ const GroupDetailsModal = ({ isOpen, onClose }) => {
             <h3 className="font-semibold mb-3">Members ({members.length})</h3>
 
             <div className="space-y-3">
-              {
-              
-              members.length === 0 ? (
+              {members.length === 0 ? (
                 <div className="text-center text-gray-400 py-10">
                   No members found.
                 </div>
               ) : (
-                 
                 members.map((member, index) => {
                   return (
                     <MemberCard

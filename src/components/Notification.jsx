@@ -3,7 +3,8 @@ import { X, Bell } from "lucide-react";
 import invitationStore from "../store/invitation.store.js";
 
 const Notification = ({ isOpen, onClose }) => {
-  const { notifications,acceptInvitation, rejectInvitation } = invitationStore();
+  const { notifications, acceptInvitation, rejectInvitation } =
+    invitationStore();
 
   if (!isOpen) return null;
 

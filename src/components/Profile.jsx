@@ -104,7 +104,6 @@ const Profile = () => {
           "
         >
           UUID: {inviteCode}
-
           <Copy size={15} />
         </button>
       </div>
@@ -277,9 +276,13 @@ const Profile = () => {
           disabled:opacity-60
           "
         >
-        
-
-          {loading ? <Loading /> : <><Save size={18} /> Update</>}
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              <Save size={18} /> Update
+            </>
+          )}
         </button>
       </form>
     </div>

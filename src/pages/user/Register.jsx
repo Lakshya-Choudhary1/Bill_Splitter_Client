@@ -8,7 +8,7 @@ import Loading from "../../components/layout/Loading";
 
 const Register = () => {
   const { register } = userStore();
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [registerForm, setRegisterForm] = useState({
     name: "",
@@ -42,11 +42,11 @@ const Register = () => {
     await register(registerForm);
     setIsLoading(false);
     setRegisterForm({
-    name: "",
-    email: "",
-    password: "",
-    upiId: "",
-    })
+      name: "",
+      email: "",
+      password: "",
+      upiId: "",
+    });
   };
 
   return (
@@ -92,7 +92,7 @@ const Register = () => {
 
         <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
           {/* Name */}
-  
+
           <Input
             icon={<User size={20} />}
             name="name"
@@ -135,7 +135,7 @@ const Register = () => {
           />
 
           <button
-          disabled={isLoading}
+            disabled={isLoading}
             type="submit"
             className="
               w-full
@@ -149,7 +149,6 @@ const Register = () => {
             "
           >
             {isLoading ? <Loading /> : "Register"}
-            
           </button>
         </form>
 

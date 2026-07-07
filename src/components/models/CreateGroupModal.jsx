@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, Users } from "lucide-react";
-import groupStore from "../../store/group.store.js"
+import groupStore from "../../store/group.store.js";
 import Loading from "../layout/Loading.jsx";
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
@@ -9,9 +9,9 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     description: "",
     currency: "INR",
   });
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const {createGroup} = groupStore();
+  const { createGroup } = groupStore();
 
   if (!isOpen) return null;
 
@@ -22,14 +22,18 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     }));
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.name.trim()) return;
 
-     setLoading(true);
-     createGroup({name:formData.name , description:formData.description , currency:formData.currency});
-     setLoading(false);
+    setLoading(true);
+    createGroup({
+      name: formData.name,
+      description: formData.description,
+      currency: formData.currency,
+    });
+    setLoading(false);
 
     setFormData({
       name: "",
@@ -70,9 +74,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
         <form onSubmit={handleSubmit} className="p-5 space-y-5">
           {/* Group Name */}
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Group Name
-            </label>
+            <label className="block text-sm font-medium mb-2">Group Name</label>
 
             <input
               type="text"
@@ -103,9 +105,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
 
           {/* Currency */}
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Currency
-            </label>
+            <label className="block text-sm font-medium mb-2">Currency</label>
 
             <select
               name="currency"
@@ -134,8 +134,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
               type="submit"
               className="flex-1 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
             >
-               {loading ? <Loading /> : "Create Group"}
-              
+              {loading ? <Loading /> : "Create Group"}
             </button>
           </div>
         </form>

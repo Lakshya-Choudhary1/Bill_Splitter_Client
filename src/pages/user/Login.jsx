@@ -4,11 +4,11 @@ import { Mail, Lock, ArrowLeft } from "lucide-react";
 import { serverUrl } from "../../../config/config";
 import userStore from "../../store/user.store";
 import toast from "react-hot-toast";
-import Loading from "../../components/layout/Loading.jsx"
+import Loading from "../../components/layout/Loading.jsx";
 
 const Login = () => {
   const { login } = userStore();
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,10 +33,10 @@ const Login = () => {
       toast.error("Please fill all fields");
       return;
     }
-    
-    await login({email:loginForm.email , password: loginForm.password});
+
+    await login({ email: loginForm.email, password: loginForm.password });
     setIsLoading(false);
-    setLoginForm({email:"",password:""})
+    setLoginForm({ email: "", password: "" });
   };
 
   return (
@@ -123,7 +123,7 @@ const Login = () => {
           </div>
 
           <button
-          disabled={isLoading}
+            disabled={isLoading}
             className="
               w-full
               py-3

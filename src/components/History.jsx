@@ -50,7 +50,7 @@ const History = () => {
             allExpenses.map((expense) => (
               <div
                 key={expense.id}
-             className="
+                className="
             bg-white
             rounded-2xl
             shadow-sm
@@ -74,7 +74,6 @@ const History = () => {
                       {expense.title}
                     </h3>
 
-
                     <p className="text-sm text-gray-500 mt-1">
                       Paid by{" "}
                       <span className="font-medium">
@@ -95,11 +94,12 @@ const History = () => {
                   </div>
                 </div>
 
-
                 <div className="text-right flex flex-col">
-                  <p className="font-bold text-blue-600 text-lg">{expense.currency}</p>
                   <p className="font-bold text-blue-600 text-lg">
-                     {Number(expense.amount).toFixed(2)}
+                    {expense.currency}
+                  </p>
+                  <p className="font-bold text-blue-600 text-lg">
+                    {Number(expense.amount).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -142,8 +142,6 @@ const History = () => {
                     <h3 className="font-semibold text-gray-800">
                       {settlement.from_user_name} → {settlement.to_user_name}
                     </h3>
-
-                   
 
                     <p className="text-xs text-gray-400 mt-1">
                       {new Date(settlement.created_at).toLocaleDateString(

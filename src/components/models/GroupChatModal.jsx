@@ -74,10 +74,7 @@ const GroupChatModal = ({ isOpen, onClose }) => {
           </div>
 
           {/* Chat */}
-          <Chats
-            groupExpenses={groupExpenses}
-            currentMember={currentMember}
-          />
+          <Chats groupExpenses={groupExpenses} currentMember={currentMember} />
 
           {/* Floating Add Expense Button */}
           <button

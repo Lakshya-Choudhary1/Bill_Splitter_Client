@@ -12,15 +12,15 @@ const CreateExpenseModal = ({ isOpen, onClose }) => {
     amount: 0,
   });
 
-  const {selectedGroup} = groupStore();
-  const {createExpense} = expenseStore();
+  const { selectedGroup } = groupStore();
+  const { createExpense } = expenseStore();
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setFormData((state) => ({ ...state, [name]: value }));
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { title, description, amount } = formData;
@@ -30,7 +30,7 @@ const CreateExpenseModal = ({ isOpen, onClose }) => {
       return;
     }
 
-      createExpense(selectedGroup.id,formData)
+    createExpense(selectedGroup.id, formData);
     onClose();
   };
 
@@ -87,7 +87,10 @@ const CreateExpenseModal = ({ isOpen, onClose }) => {
               className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
             />
 
-            <button type="submit" className="w-full rounded-xl bg-linear-to-r from-blue-600 to-indigo-600 py-3 text-white font-semibold shadow-lg hover:shadow-xl transition">
+            <button
+              type="submit"
+              className="w-full rounded-xl bg-linear-to-r from-blue-600 to-indigo-600 py-3 text-white font-semibold shadow-lg hover:shadow-xl transition"
+            >
               Add Expense
             </button>
           </form>

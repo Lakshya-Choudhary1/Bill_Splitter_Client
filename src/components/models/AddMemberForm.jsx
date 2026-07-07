@@ -6,15 +6,15 @@ import groupStore from "../../store/group.store.js";
 const AddMemberForm = ({ isOpen, onClose }) => {
   const [memberId, setMemberId] = useState("");
 
-  const {addMember,selectedGroup} = groupStore();
+  const { addMember, selectedGroup } = groupStore();
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!memberId.trim()) return;
 
-    await addMember(selectedGroup.id,memberId);
-  
+    await addMember(selectedGroup.id, memberId);
+
     setMemberId("");
     onClose();
   };
