@@ -28,7 +28,6 @@ const Profile = () => {
 
   const copyInviteCode = () => {
     navigator.clipboard.writeText(inviteCode);
-
     toast.success("Invite code copied");
   };
 
@@ -104,7 +103,7 @@ const Profile = () => {
           font-medium
           "
         >
-          {inviteCode}
+          UUID: {inviteCode}
 
           <Copy size={15} />
         </button>

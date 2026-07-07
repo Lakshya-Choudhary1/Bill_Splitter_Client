@@ -13,12 +13,7 @@ const TopNavbar = () => {
   const { user, logout } = userStore();
 
   // Count only pending invitations
-  const pendingCount = useMemo(
-    () =>
-      notifications.filter((item) => item.status?.toLowerCase() === "pending")
-        .length,
-    [notifications],
-  );
+ 
 
   return (
     <header
@@ -60,7 +55,7 @@ const TopNavbar = () => {
             <Bell size={20} />
 
             {/* Notification Count Badge */}
-            {pendingCount > 0 && (
+            {invitationStore.length > 0 && (
               <span
                 className="
                   absolute
@@ -82,7 +77,7 @@ const TopNavbar = () => {
                   shadow-md
                 "
               >
-                {pendingCount > 99 ? "99+" : pendingCount}
+                {notifications.length > 99 ? "99+" : notifications.length}
               </span>
             )}
           </button>
@@ -115,7 +110,7 @@ const TopNavbar = () => {
                 absolute
                 right-0
                 top-12
-                w-56
+                w-66
                 bg-white
                 rounded-2xl
                 shadow-xl

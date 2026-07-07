@@ -11,9 +11,8 @@ import groupStore from "../store/group.store.js";
 const Groups = () => {
   const [createOpen, setCreateOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
-  const [selectedGroup, setSelectedGroup] = useState(null);
 
-  const { groups } = groupStore();
+  const { groups , selectedGroup , setSelectedGroup } = groupStore();
 
   const handleGroupClick = (group) => {
     setSelectedGroup(group);
@@ -56,7 +55,7 @@ const Groups = () => {
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition cursor-pointer p-5 flex justify-between items-center"
               >
                 <div>
-                  <h2 className="font-semibold text-lg">
+                  <h2 className="font-semibold text-md">
                     {group.name}
                   </h2>
                 </div>
@@ -84,7 +83,6 @@ const Groups = () => {
           setChatOpen(false);
           setSelectedGroup(null);
         }}
-        group={selectedGroup}
       />
     </>
   );

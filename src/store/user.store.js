@@ -52,6 +52,7 @@ const userStore = create((set, get) => ({
         upi_id: upiId,
       });
 
+      console.log("register response", res.data);
       if (res.data.user) {
         get().setUser(res.data.user);
 

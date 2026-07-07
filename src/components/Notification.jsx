@@ -3,7 +3,7 @@ import { X, Bell } from "lucide-react";
 import invitationStore from "../store/invitation.store.js";
 
 const Notification = ({ isOpen, onClose }) => {
-  const { notifications,acceptInvitaion, rejectInvitation } = invitationStore();
+  const { notifications,acceptInvitation, rejectInvitation } = invitationStore();
 
   if (!isOpen) return null;
 
@@ -11,7 +11,7 @@ const Notification = ({ isOpen, onClose }) => {
     <div
       className="
         absolute
-        right-0
+        -right-5
         top-12
         z-50
         w-80

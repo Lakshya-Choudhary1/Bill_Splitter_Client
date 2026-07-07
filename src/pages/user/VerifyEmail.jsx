@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Mail } from "lucide-react";
 import toast from "react-hot-toast";
+import {useNavigate} from "react-router-dom";
 
 import userStore from "../../store/user.store.js";
 
@@ -8,6 +9,7 @@ const VerifyEmail = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);
+  const navigate = useNavigate();
 
   const { verifyEmail, resendVerifyEmailToken } = userStore();
 
@@ -53,6 +55,7 @@ const VerifyEmail = () => {
     try {
       setLoading(true);
       await verifyEmail(token);
+      navigate("/dashboard")
     } finally {
       setLoading(false);
     }

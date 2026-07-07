@@ -34,8 +34,9 @@ const Login = () => {
       return;
     }
     
-    await login(loginForm);
+    await login({email:loginForm.email , password: loginForm.password});
     setIsLoading(false);
+    setLoginForm({email:"",password:""})
   };
 
   return (

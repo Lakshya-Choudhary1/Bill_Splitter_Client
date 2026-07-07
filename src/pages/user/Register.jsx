@@ -41,6 +41,12 @@ const Register = () => {
 
     await register(registerForm);
     setIsLoading(false);
+    setRegisterForm({
+    name: "",
+    email: "",
+    password: "",
+    upiId: "",
+    })
   };
 
   return (
