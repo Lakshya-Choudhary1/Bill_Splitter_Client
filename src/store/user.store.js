@@ -17,10 +17,10 @@ const userStore = create((set, get) => ({
 
       if (res.data.user) {
         get().setUser(res.data.user);
+        toast.success(`Welcome ${res.data.user.name} 👋.`);
       }
     } catch (error) {
       console.log(error);
-    } finally {
     }
   },
 
@@ -33,12 +33,10 @@ const userStore = create((set, get) => ({
 
       if (res.data.user) {
         get().setUser(res.data.user);
-
         toast.success(`Welcome back ${res.data.user.name}`);
       }
     } catch (error) {
       get().setUser(null);
-
       toast.error(error.response?.data?.message || "Login failed");
     }
   },
@@ -52,33 +50,39 @@ const userStore = create((set, get) => ({
         upi_id: upiId,
       });
 
-      console.log("register response", res.data);
       if (res.data.user) {
         get().setUser(res.data.user);
-
-        toast.success("Account created");
+        toast.success(`OTP has been sent to ${email}`);
       }
     } catch (error) {
       get().setUser(null);
-
       toast.error(error.response?.data?.message || "Register failed");
     }
   },
-
   verifyEmail: async (token) => {
     try {
-      const res = await axiosInstance.post("/user/verifyEmail", { token });
-      if (res.data.success) {
+      const { data } = await axiosInstance.post("/user/verifyEmail", {
+        token,
+      });
+
+      if (data.success) {
         set((state) => ({
-          user: {
-            ...state.user,
-            is_verified: true,
-          },
+          user: state.user
+            ? {
+                ...state.user,
+                is_verified: true,
+              }
+            : null,
         }));
-        toast.success(res.data.message);
+
+        toast.success(data.message);
+        return true;
       }
+
+      return false;
     } catch (error) {
       toast.error(error.response?.data?.message || "Verify email failed");
+      return false;
     }
   },
 

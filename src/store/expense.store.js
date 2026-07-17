@@ -14,7 +14,7 @@ const expenseStore = create((set, get) => ({
       set({ recentExpenses: response.data.expenses });
     } catch (error) {
       console.error("Error fetching recent expenses:", error);
-      toast.error("Failed to fetch recent expenses.");
+      toast.error(error.response?.data?.message ||"Failed to fetch recent expenses.");
     }
   },
   getOweExpenses: async () => {
@@ -25,7 +25,7 @@ const expenseStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error fetching owe expenses:", error);
-      toast.error("Failed to fetch owe expenses.");
+      toast.error(error.response?.data?.message || "Failed to fetch owe expenses.");
     }
   },
   getOwedExpenses: async () => {
@@ -36,7 +36,7 @@ const expenseStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error fetching owed expenses:", error);
-      toast.error("Failed to fetch owed expenses.");
+      toast.error(error.response?.data?.message || "Failed to fetch owed expenses.");
     }
   },
   getAllExpenses: async () => {
@@ -47,7 +47,7 @@ const expenseStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error fetching all expenses:", error);
-      toast.error("Failed to fetch all expenses.");
+      toast.error(error.response?.data?.message || "Failed to fetch all expenses.");
     }
   },
   createExpense: async (groupId, { title, description, amount }) => {
@@ -73,7 +73,7 @@ const expenseStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error creating expense:", error);
-      toast.error("Failed to create expense.");
+      toast.error(error.response?.data?.message || "failed to create expence")
     }
   },
   getGroupExpenses: async (groupId) => {
@@ -84,7 +84,7 @@ const expenseStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error fetching group expenses:", error);
-      toast.error("Failed to fetch group expenses.");
+      toast.error(error.response?.data?.message ||"Failed to fetch group expenses.");
     }
   },
   createGroupExpense: async (groupId, { title, description, amount }) => {
@@ -106,7 +106,7 @@ const expenseStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error creating group expense:", error);
-      toast.error("Failed to create group expense.");
+      toast.error(error.response?.data?.message || "Failed to create group expense.");
     }
   },
 }));

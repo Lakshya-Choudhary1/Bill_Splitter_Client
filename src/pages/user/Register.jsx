@@ -28,25 +28,35 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+   
     if (
       !registerForm.name.trim() ||
       !registerForm.email.trim() ||
       !registerForm.password.trim() ||
       !registerForm.upiId.trim()
     ) {
+
       toast.error("Please fill all fields");
+      setIsLoading(false);
       return;
     }
 
-    await register(registerForm);
-    setIsLoading(false);
-    setRegisterForm({
-      name: "",
-      email: "",
-      password: "",
-      upiId: "",
-    });
+    try{
+       setIsLoading(true);
+      await register(registerForm);
+      setIsLoading(false);
+    }catch(err){
+      setIsLoading(false);
+    }finally{
+      setIsLoading(false);
+      setRegisterForm({
+        name: "",
+        email: "",
+        password: "",
+        upiId: "",
+      });
+    }
+ 
   };
 
   return (
@@ -103,7 +113,6 @@ const Register = () => {
           />
 
           {/* Email */}
-
           <Input
             icon={<Mail size={20} />}
             name="email"
@@ -231,6 +240,10 @@ const Input = ({ icon, name, value, onChange, placeholder, type = "text" }) => (
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+
+      required
+      minLength={name == "password" ? 6 : null}
+      maxLength={name == ""? "" : null}
       className="
         outline-none
         w-full

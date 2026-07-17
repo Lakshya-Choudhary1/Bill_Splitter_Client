@@ -17,7 +17,7 @@ const settlementStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error fetching total amount settled:", error);
-      toast.error("Failed to fetch total amount settled.");
+      toast.error(error.response?.data?.message || "Failed to fetch total amount settled.");
     }
   },
   getAllSettlements: async () => {
@@ -29,7 +29,7 @@ const settlementStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error fetching all settlements:", error);
-      toast.error("Failed to fetch all settlements.");
+      toast.error(error.response?.data?.message || "Failed to fetch all settlements.");
     }
   },
   createSettlement: async (expenceId, groupId) => {
@@ -43,7 +43,7 @@ const settlementStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error Creating settlement", error);
-      toast.error("Failed to Create settlement.");
+      toast.error(error.response?.data?.message || "Failed to Create settlement.");
     }
   },
   acceptSettlement: async (settlementId) => {
@@ -59,7 +59,7 @@ const settlementStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error Creating settlement", error);
-      toast.error("Failed to Create settlement.");
+      toast.error(error.response?.data?.message || "Failed to Create settlement.");
     }
   },
   rejectSettlement: async (settlementId) => {
@@ -74,7 +74,7 @@ const settlementStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error Rejecting settlement", error);
-      toast.error("Failed to Reject settlement.");
+      toast.error(error.response?.data?.message || "Failed to Reject settlement.");
     }
   },
   getAllPendingSettlement: async () => {
@@ -85,7 +85,7 @@ const settlementStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error Rejecting settlement", error);
-      toast.error("Failed to Reject settlement.");
+      toast.error(error.response?.data?.message || "Failed to Reject settlement.");
     }
   },
 }));

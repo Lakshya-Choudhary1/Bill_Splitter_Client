@@ -13,7 +13,7 @@ const invitationStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error fetching notifications:", error);
-      toast.error("Failed to fetch notifications.");
+      toast.error(error.response?.data?.message || "Failed to fetch notifications.");
     }
   },
   acceptInvitation: async (invitationId) => {
@@ -32,7 +32,7 @@ const invitationStore = create((set, get) => ({
       }
     } catch (error) {
       console.error(error);
-      toast.error("Failed to accept invitation.");
+      toast.error(error.response?.data?.message || "Failed to accept invitation.");
     }
   },
   rejectInvitation: async (invitationId) => {
@@ -46,7 +46,7 @@ const invitationStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error rejecting invitation:", error);
-      toast.error("Failed to reject invitation.");
+      toast.error(error.response?.data?.message || "Failed to reject invitation.");
     }
   },
 }));

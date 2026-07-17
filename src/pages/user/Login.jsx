@@ -28,12 +28,12 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    
     if (!loginForm.email.trim() || !loginForm.password.trim()) {
       toast.error("Please fill all fields");
       return;
     }
-
+    setIsLoading(true);
     await login({ email: loginForm.email, password: loginForm.password });
     setIsLoading(false);
     setLoginForm({ email: "", password: "" });

@@ -10,9 +10,8 @@ import App from "./App.jsx";
 // Render the application inside the main root element.
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <StrictMode>
       <App />
       <Toaster position="top-center" reverseOrder={false} />
-    </StrictMode>
+  
   </BrowserRouter>,
 );

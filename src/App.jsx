@@ -58,19 +58,12 @@ const RedirectRoute = ({ children }) => {
 };
 
 const App = () => {
-  const { checkAuth, authLoading } = userStore();
+  const { checkAuth } = userStore();
 
   useEffect(() => {
     checkAuth();
-  }, [checkAuth]);
+  }, []);
 
-  if (authLoading) {
-    return (
-      <MobileFrame>
-        <Loading />
-      </MobileFrame>
-    );
-  }
 
   return (
     <MobileFrame>
@@ -131,7 +124,7 @@ const App = () => {
           }
         />
 
-        <Route path="*" element={<Navigate to="/" replace />} />
+       
       </Routes>
     </MobileFrame>
   );
